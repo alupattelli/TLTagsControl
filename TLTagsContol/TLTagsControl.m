@@ -307,7 +307,8 @@
         textField.text = @"";
         [self addTag:tag];
     }
-    
+
+    [self endEditing:YES];
     return YES;
 }
 
@@ -315,6 +316,13 @@
     NSString *resultingString;
     NSString *text = textField.text;
     
+    if ([string isEqualToString:@" "]) {
+        NSString *tag = textField.text;
+        textField.text = @"";
+        resultingString = @"";
+        [self addTag:tag];
+        return NO;
+    }
     
     if (string.length == 1 && [string rangeOfCharacterFromSet:[[NSCharacterSet alphanumericCharacterSet] invertedSet]].location != NSNotFound) {
         return NO;
